@@ -1,0 +1,1 @@
+java -jar selenium-server-4.13.0.jar node --port 6667 --config node2.toml
