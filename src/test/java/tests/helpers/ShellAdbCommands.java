@@ -1,18 +1,16 @@
-package core.helpers;
+package tests.helpers;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class ShellAdbCommands {
 
     private static final String COMMAND_ADB_UNINSTALL_PACKAGE_DEVICE_UDID = "adb -s %s uninstall %s";
     private static final Duration MAX_TIMEOUT = Duration.ofMillis(10000);
-    private static final Logger log = LogManager.getLogger(ShellAdbCommands.class);
 
     public static void removeApp(Object deviceName, Object appPackage) {
         execute(String.format(COMMAND_ADB_UNINSTALL_PACKAGE_DEVICE_UDID, deviceName, appPackage));

@@ -1,0 +1,4 @@
+appium:
+  platform: android
+  app: src/test/resources/apk/app-debug.apk
+  host: http://localhost:4444/ #local appium; local grid - http://localhost:4444/

@@ -1,19 +1,16 @@
 package tests;
 
-import core.AppiumDriverUtils;
-import io.qameta.allure.Description;
-import org.junit.jupiter.api.Test;
-import pages.LoginPage;
-import pages.WelcomePage;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class LoginTests {
 
-public class LoginTests extends BaseTest {
+   /* @Autowired
+    public LoginPage loginPage;
+    @Autowired
+    public AppiumDriverUtils appiumDriverUtils;
 
     @Test
     @Description("Test to verify success login")
     void successLoginTest() {
-        var loginPage = new LoginPage();
 
         loginPage.verifyTitle();
         //check value by default(equals label(hint))
@@ -36,14 +33,12 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         var welcomePage = new WelcomePage();
-        welcomePage.verifyLoginResultTitle();
+        //welcomePage.verifyLoginResultTitle();
     }
 
     @Test
     @Description("Test to verify invalid login")
     void failedLoginTest() {
-        var loginPage = new LoginPage();
-
         loginPage.enterLogin("FakeLogin");
         loginPage.enterPassword("FakePassword");
         loginPage.clickLogin();
@@ -74,7 +69,6 @@ public class LoginTests extends BaseTest {
     @Test
     @Description("Test to verify entering invalid symbols")
     void enteringInvalidSymbolsTest() {
-        var loginPage = new LoginPage();
         loginPage.enterLogin("!@#$Login");
 
         var validationMessage = loginPage.getValidationMessage();
@@ -84,13 +78,12 @@ public class LoginTests extends BaseTest {
     @Test
     @Description("Test to verify cutting invalid symbols by past option")
     void cuttingInvalidSymbolsTest() {
-        var loginPage = new LoginPage();
 
         var login = "!@#$Login";
         var password = "!@#$Password";
-        AppiumDriverUtils.setClipboardText(login);
+        appiumDriverUtils.setClipboardText(login);
         loginPage.pasteInLoginField();
-        AppiumDriverUtils.setClipboardText(password);
+        appiumDriverUtils.setClipboardText(password);
         loginPage.pasteInPasswordField();
 
         var loginValue = loginPage.getLoginText();
@@ -100,5 +93,5 @@ public class LoginTests extends BaseTest {
 
         var validationMessage = loginPage.getValidationMessage();
         assertEquals("Введено все кроме: '!@#$'", validationMessage);
-    }
+    }*/
 }

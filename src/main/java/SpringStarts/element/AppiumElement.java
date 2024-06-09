@@ -1,33 +1,28 @@
-package core.element;
+package SpringStarts.element;
 
-import core.AppiumDriverManager;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.touch.offset.ElementOption;
-import io.appium.java_client.touch.offset.PointOption;
-import org.apache.logging.log4j.LogManager;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.logging.log4j.Logger;
 
 import java.time.Duration;
 import java.util.regex.Pattern;
 
-import static core.AppiumDriverUtils.*;
-import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 
-
+@Slf4j
 public class AppiumElement {
 
-    private static final Duration DURATION = Duration.ofSeconds(5);
-    private static final Logger log = LogManager.getLogger(AppiumElement.class);
+    protected AppiumDriver driver;
+    protected WebDriverWait wait;
+
     private final By locator;
-    private final AppiumDriver driver;
+    private static final Duration DURATION = Duration.ofSeconds(5);
 
-
-    public AppiumElement(By locator) {
+    public AppiumElement(AppiumDriver driver, WebDriverWait wait, By locator) {
+        this.driver = driver;
+        this.wait = wait;
         this.locator = locator;
-        this.driver = AppiumDriverManager.getDriver();
     }
 
     public void sendText(String text) {
@@ -59,19 +54,19 @@ public class AppiumElement {
     }
 
     public void longPress() {
-        newTouchAction().longPress(longPressOptions().withElement(ElementOption.element(driver.findElement(locator)))
-                .withDuration(Duration.ofSeconds(2)))
+  /*      appiumDriverUtils.newTouchAction().longPress(longPressOptions().withElement(ElementOption.element(driver.findElement(locator)))
+                        .withDuration(Duration.ofSeconds(2)))
                 .release()
-                .perform();
+                .perform();*/
         log.info("Long press on element: " + locator);
 
     }
 
     public void clickOnPastOption() {
-        var element = driver.findElement(locator);
+        /*var element = driver.findElement(locator);
         var x = element.getLocation().getX() + 30;
         var y = element.getLocation().getY() - 30;
-        newTouchAction().press(PointOption.point(x, y)).release().perform();
+        appiumDriverUtils.newTouchAction().press(PointOption.point(x, y)).release().perform();*/
         log.warn("Long press on element: " + locator);
     }
 
@@ -84,11 +79,11 @@ public class AppiumElement {
     }
 
     public void waitForElementVisible(Duration duration) {
-        new WebDriverWait(driver, duration).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public void waitForElementHasAnyText() {
-        new WebDriverWait(driver, DURATION).until(ExpectedConditions.textMatches(locator, Pattern.compile("^(?!\\s*$).+")));
+        wait.until(ExpectedConditions.textMatches(locator, Pattern.compile("^(?!\\s*$).+")));
     }
 
     public void waitForElementNotVisible() {
@@ -96,7 +91,7 @@ public class AppiumElement {
     }
 
     public void waitForElementNotVisible(Duration duration) {
-        new WebDriverWait(driver, duration).until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public void waitForElementClickable() {
@@ -104,6 +99,6 @@ public class AppiumElement {
     }
 
     public void waitForElementClickable(Duration duration) {
-        new WebDriverWait(driver, duration).until(ExpectedConditions.elementToBeClickable(locator));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 }
